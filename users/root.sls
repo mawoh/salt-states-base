@@ -1,7 +1,8 @@
 # root SSH-Key Management
-{% for user, args in pillar.get('users', {}).iteritems() %}
+{% for user, args in pillar.get('users', {}).iteritems() if args.rootaccess %}
+{# % if args.get('rootaccess') %#}
 {% for auth in args.get('ssh_auth', []) %}
-{{ auth['key'] }}_root_ssh_auth:
+{{ user }}_root_ssh_auth_{{ loop.index }}:
   ssh_auth:
     - present
     - user: root
@@ -9,6 +10,7 @@
     - comment: {{ auth.get('comment', user) }}
     - name: {{ auth['key'] }}
 {% endfor %}
+{#% endif %#}
 {% endfor %}
 
 {% for user, args in pillar.get('users', {}).iteritems() %}
