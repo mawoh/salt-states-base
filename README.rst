@@ -39,6 +39,11 @@ Getting started
 
 
 
+Contributing
+------------
+
+please use git-flow and the suggested workflow during development
+
 Reference
 ---------
 
